@@ -3,129 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Promise Day | System Override 💖</title>
+<title>Promise Day | My Forever ❤️</title>
 
 <style>
 :root {
     --primary: #ff4d88;
-    --secondary: #fff0f5;
-    --accent: #ff85c1;
-    --glass: rgba(255, 255, 255, 0.75);
-    --terminal-bg: rgba(0, 0, 0, 0.04);
+    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #ffe4ec 100%);
+    --card-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(circle at center, #fff0f5 0%, #ffe4ec 100%);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-gradient);
     color: #444;
     text-align: center;
     padding: 20px;
     min-height: 100vh;
-    overflow-x: hidden;
-    /* Custom Heart Cursor */
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">💖</text></svg>'), auto;
 }
 
 h1 {
     color: var(--primary);
-    font-size: clamp(1.8rem, 8vw, 2.8rem);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    font-size: 2.5rem;
     margin-bottom: 5px;
 }
 
 .card {
-    background: var(--glass);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 24px;
-    padding: 25px;
+    padding: 30px;
     margin: 20px auto;
-    max-width: 650px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--card-shadow);
 }
 
 .patch-notes {
     text-align: left;
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px;
-    background: var(--terminal-bg);
-    padding: 15px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 15px;
     border-left: 4px solid var(--primary);
-    margin-top: 15px;
 }
 
 button {
-    background: linear-gradient(45deg, var(--primary), var(--accent));
+    background: linear-gradient(45deg, #ff4d88, #ff85c1);
     color: white;
     border: none;
-    padding: 16px 35px;
+    padding: 15px 40px;
     border-radius: 50px;
     font-weight: bold;
     font-size: 1.1em;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 77, 136, 0.4);
-    transition: all 0.3s;
-    margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(255, 77, 136, 0.3);
+    transition: 0.3s;
 }
 
-button:hover {
-    letter-spacing: 1px;
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 77, 136, 0.6);
-}
+button:hover { transform: scale(1.05); }
 
-/* Secret Message Modal Overlay */
+/* --- THE ROMANTIC OVERLAY --- */
 #overlay {
     position: fixed;
     inset: 0;
-    background: rgba(255, 77, 136, 0.98);
+    background: rgba(255, 255, 255, 0.4); /* Light mist effect */
+    backdrop-filter: blur(15px); /* Soft focus background */
+    -webkit-backdrop-filter: blur(15px);
     display: none;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    color: white;
-    padding: 30px;
+    z-index: 10000;
+}
+
+.message-box {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 85%;
+    width: 450px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border: 1px solid var(--primary);
 }
 
 #secretMessage {
-    font-size: clamp(1.2rem, 5vw, 1.8rem);
-    max-width: 800px;
-    font-weight: 300;
+    font-size: 1.3rem;
+    color: #d63384;
     line-height: 1.6;
+    font-style: italic;
 }
 
-/* Floating Elements */
-.floating-emoji {
+/* Floating Hearts Background */
+.floating-heart {
     position: fixed;
     pointer-events: none;
     z-index: -1;
-    animation: floatUp var(--duration) linear infinite;
-    opacity: 0.6;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.5;
 }
 
 @keyframes floatUp {
-    from { transform: translateY(110vh) rotate(0deg); }
-    to { transform: translateY(-10vh) rotate(360deg); }
+    from { transform: translateY(110vh); opacity: 0.8; }
+    to { transform: translateY(-10vh); opacity: 0; }
 }
 
-footer {
-    margin-top: 50px;
-    padding: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 13px;
-    opacity: 0.7;
-}
-
-.highlight { color: var(--primary); font-weight: bold; }
+footer { margin-top: 40px; font-size: 12px; opacity: 0.6; }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/typeit.min.js"></script>
@@ -133,69 +117,57 @@ footer {
 <body>
 
 <h1 id="typing"></h1>
-<p><i>Branch: <span class="highlight">main</span> | Status: <span class="highlight">Stable & Loving</span> ❤️</i></p>
+<p><i>Branch: <b>main</b> | Status: <b>Stable & Loving</b> ❤️</i></p>
 
 <div class="card">
-    <h2>💌 The Core Promise</h2>
-    <p>Today and every day, I promise to be your favorite person to do absolutely nothing with. I promise to support your wildest dreams and be the one who holds the ladder while you reach for the stars.</p>
+    <h2>💌 My Promise</h2>
+    <p>I promise to be your debugger when life gets glitchy and your biggest fan when you're winning. You're the best part of my day, every single day.</p>
 </div>
 
 <div class="card">
-    <h2 style="font-family: 'Courier New', Courier, monospace;">🛠️ System Patch Notes v2.1.1</h2>
+    <h2>🛠️ Relationship Changelog</h2>
     <div class="patch-notes">
-        <p><strong>[FIXED]</strong> Resolved "Hunger-Induced Cranky Mode" with automatic snack deployment.</p>
-        <p><strong>[OPTIMIZED]</strong> Morning cuddle routine for 25% better mood synchronization.</p>
-        <p><strong>[DEPRECATED]</strong> Successfully removed "Stubbornness.exe" from decision-making loops.</p>
-        <p><strong>[NEW FEATURE]</strong> Unlimited cloud storage for all our future memories and inside jokes.</p>
+        <p><b>[FIXED]</b> Resolved "Hunger-Induced Cranky Mode" via snack-priority-logic.</p>
+        <p><b>[NEW]</b> Added 24/7 technical support for hugs and emotional debugging.</p>
+        <p><b>[PATCHED]</b> Improved listening protocols for better communication.</p>
     </div>
 </div>
 
 <div class="card">
-    <h2>💖 Secret Access</h2>
-    <p>Execute the heart protocol to unlock a message directly from my source code.</p>
-    <button onclick="unlockLove()">Launch_Love_Program.exe</button>
+    <h2>💖 Private Key</h2>
+    <p>Unlock my true heart.exe</p>
+    <button onclick="unlockLove()">Show My Heart</button>
 </div>
 
 <div id="overlay">
-    <div id="secretMessage"></div>
-    <button onclick="closeOverlay()" style="margin-top: 40px; background: white; color: var(--primary); box-shadow: none;">Close Connection</button>
+    <div class="message-box">
+        <div id="secretMessage"></div>
+        <button onclick="closeOverlay()" style="margin-top: 30px; background: #eee; color: #666; font-size: 0.9em; box-shadow: none; padding: 10px 20px;">Return</button>
+    </div>
 </div>
 
 <footer>
-    git commit -m "Lifetime commitment merged into main" <br>
-    Built with ❤️ | No Forks Allowed | User: Husband
+    git commit -m "Merged forever with you" | Built with ❤️
 </footer>
 
-<audio id="popSound" src="https://freesound.org/data/previews/522/522177_5121236-lq.mp3"></audio>
-
 <script>
-// 1. Typing Header
 new TypeIt("#typing", {
-    strings: ["Happy Promise Day!", "My Forever Favorite..."],
+    strings: ["Happy Promise Day!", "My Forever Human..."],
     speed: 80,
     waitUntilVisible: true,
 }).go();
 
-// 2. Secret Message Activation
 function unlockLove() {
-    const overlay = document.getElementById('overlay');
-    overlay.style.display = 'flex';
-    const popSound = document.getElementById("popSound");
-    popSound.play();
-    
-    // Clear previous content if any
-    document.getElementById("secretMessage").innerHTML = "";
+    document.getElementById('overlay').style.display = 'flex';
+    document.getElementById('secretMessage').innerHTML = "";
 
     new TypeIt("#secretMessage", {
-        speed: 40,
-        waitUntilVisible: true,
-        cursor: true
+        speed: 50,
+        cursor: false
     })
-    .type("Initializing Love Protocol... 🔓<br>")
-    .pause(800)
-    .type("I promise to love you across every dimension, every version of life, and every line of code. ")
+    .type("My dearest, <br><br>")
     .pause(400)
-    .type("You are the most beautiful 'bug' in my life's logic—I never want to fix you. ❤️")
+    .type("I promise to love you across every dimension and every line of code. You are the most beautiful part of my life. ❤️")
     .go();
 }
 
@@ -203,44 +175,16 @@ function closeOverlay() {
     document.getElementById('overlay').style.display = 'none';
 }
 
-// 3. Floating Emoji Generator
-function createEmoji() {
-    const emojis = ['💖', '✨', '🌸', '💘', '💍', '🧸'];
-    const div = document.createElement('div');
-    div.classList.add('floating-emoji');
-    div.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    div.style.left = Math.random() * 100 + 'vw';
-    div.style.fontSize = (Math.random() * 20 + 15) + 'px';
-    div.style.setProperty('--duration', (Math.random() * 5 + 7) + 's');
-    
-    document.body.appendChild(div);
-    setTimeout(() => div.remove(), 10000);
-}
-
-// Generate an emoji every 600ms
-setInterval(createEmoji, 600);
-
-// 4. Interactive Mouse Trail
-document.addEventListener('mousemove', (e) => {
-    if(Math.random() > 0.85) { // Only spawn occasionally for performance
-        const trail = document.createElement('div');
-        trail.innerHTML = '❤️';
-        trail.style.position = 'fixed';
-        trail.style.left = e.clientX + 'px';
-        trail.style.top = e.clientY + 'px';
-        trail.style.pointerEvents = 'none';
-        trail.style.fontSize = '12px';
-        trail.style.zIndex = '1000';
-        document.body.appendChild(trail);
-        
-        trail.animate([
-            { opacity: 1, transform: 'scale(1) translate(0, 0)' },
-            { opacity: 0, transform: 'scale(2) translate(0, -30px)' }
-        ], { duration: 1000, easing: 'ease-out' });
-        
-        setTimeout(() => trail.remove(), 1000);
-    }
-});
+// Background hearts
+setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('floating-heart');
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+}, 700);
 </script>
 
 </body>
