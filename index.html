@@ -9,7 +9,7 @@
 <style>
     body {
         margin: 0;
-        font-family: 'Segoe UI', monospace;
+        font-family: 'Segoe UI', sans-serif;
         background: linear-gradient(to bottom right, #fff0f5, #ffe4ec);
         color: #444;
         text-align: center;
@@ -19,7 +19,7 @@
 
     h1 {
         color: #ff4d88;
-        font-size: 2.5em;
+        font-size: 2.8em;
         margin-bottom: 10px;
     }
 
@@ -36,17 +36,7 @@
         margin: 30px auto;
         max-width: 700px;
         text-align: left;
-    }
-
-    pre {
-        background: #fff;
-        border-radius: 12px;
-        padding: 18px;
-        text-align: left;
-        overflow-x: auto;
-        border-left: 5px solid #ff69b4;
-        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.6;
     }
 
@@ -105,51 +95,37 @@
     }
 </style>
 
-<!-- Typing animation -->
+<!-- Typing animation library -->
 <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/typeit.min.js"></script>
 </head>
 
 <body>
 
+<!-- Typing Header -->
 <h1 id="typing"></h1>
-<p><em>You debug my bad days and compile my happiness</em></p>
+<p><em>My love, my favorite human, my everything ❤️</em></p>
 
-<!-- Core Function -->
+<!-- Promises Section -->
 <div class="card">
-    <h2>💘 Core Function</h2>
-    <pre><code>function loveForever(us) {
-    while (lifeContinues) {
-        care();
-        support();
-        chooseEachOther();
-    }
-}</code></pre>
+    <h2>💌 My Promise to You</h2>
+    <p>Today and every day, I promise to stand by your side, laugh with you, support you in everything, and make our life full of love, joy, and warmth.</p>
+    <p>I promise to celebrate your wins, hold you through challenges, and make even the simplest moments magical. You are my home, my happiness, and my heart.</p>
 </div>
 
-<!-- Lifetime Promise -->
+<!-- Lifetime Commitment Section -->
 <div class="card">
-    <h2>💞 Lifetime Promise</h2>
-    <pre><code>try {
-    buildLifeTogether();
-    shareDreams();
-    growOldSideBySide();
-} catch (badDay) {
-    holdHands();
-    stayStrongerTogether();
-    remind("We’ve got this ❤️");
-}</code></pre>
+    <h2>💞 Lifetime Commitment</h2>
+    <p>I promise to grow with you, dream with you, and create a world together where love, trust, and laughter never end. No matter what life brings, I am yours completely — forever and always.</p>
 </div>
 
-<!-- Secret Love Message -->
+<!-- Secret Love Message Button -->
 <div class="card">
-    <h2>💌 Secret Developer Message</h2>
-    <p>Only the best programmer knows where to click…</p>
+    <h2>💖 Secret Love Message</h2>
+    <p>Click the button to unlock a little surprise from my heart…</p>
     <button onclick="revealMessage()">Launch_Love_Program.exe</button>
     <div id="secretMessage">
-        💖 You are the best thing life ever deployed into my world.  
-        No bugs, no crashes — just forever love, hugs, and partnership.  
-        Thank you for being my safe place, my happiness, and my favorite human.  
-        I promise to stand by you in every version of life. 💖
+        💖 You are the best thing life ever gave me.  
+        Every moment with you is a treasure, and I promise to love you, support you, and stand by you in every version of life. Forever yours. 💖
     </div>
 </div>
 
@@ -164,35 +140,35 @@ Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
 <script>
   // Typing animation
   new TypeIt("#typing", {
-    strings: ["💖 Happy Promise Day, My Favorite Programmer 💖", "Running Love_Program.exe ❤️", "No bugs. Only hugs and love."],
+    strings: ["💖 Happy Promise Day, My Love 💖", "You are my heart, my happiness, my forever ❤️"],
     speed: 100,
     breakLines: true,
     loop: false
   }).go();
 
-  // Reveal secret message and button hearts
+  // Reveal secret message + small heart burst from button
   function revealMessage() {
       const msg = document.getElementById("secretMessage");
       msg.style.display = "block";
 
-      // Small heart burst from button
       const button = document.querySelector("button");
       for (let i = 0; i < 12; i++) createHeart(button.offsetLeft + button.offsetWidth/2, button.offsetTop + button.offsetHeight/2);
   }
 
-  // Click anywhere for fireworks hearts + sound
+  // Click anywhere on page → hearts + pop sound
   const popSound = document.getElementById("popSound");
 
-  document.addEventListener("click", function(e) {
-      if(e.target.tagName.toLowerCase() === "button") return; // skip button clicks
-
+  document.addEventListener("click", function(e){
       popSound.currentTime = 0;
       popSound.play();
 
-      for (let i=0; i<12; i++) createHeart(e.clientX, e.clientY);
+      for(let i=0; i<12; i++){
+          createHeart(e.clientX, e.clientY);
+      }
   });
 
-  function createHeart(x, y) {
+  // Heart creation function
+  function createHeart(x, y){
       const heart = document.createElement("div");
       heart.classList.add("heart");
       heart.innerHTML = "❤";
@@ -203,12 +179,12 @@ Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
 
       document.body.appendChild(heart);
 
-      setTimeout(() => {
+      setTimeout(()=>{
           heart.style.transform = `translateY(${-(100 + Math.random()*100)}px) translateX(${Math.random()*200-100}px) rotate(${Math.random()*360}deg) scale(${1+Math.random()})`;
           heart.style.opacity = 0;
       }, 50);
 
-      setTimeout(() => heart.remove(), 1200);
+      setTimeout(()=> heart.remove(), 1200);
   }
 </script>
 
