@@ -3,242 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Promise Day 💖</title>
+<title>Promise Day | System Override 💖</title>
 
-<!-- Styles -->
 <style>
 :root {
-    --primary: #ff69b4;
-    --secondary: #ffe4ec;
+    --primary: #ff4d88;
+    --secondary: #fff0f5;
     --accent: #ff85c1;
+    --glass: rgba(255, 255, 255, 0.75);
+    --terminal-bg: rgba(0, 0, 0, 0.04);
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom right, #fff0f5, #ffe4ec);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #fff0f5 0%, #ffe4ec 100%);
     color: #444;
     text-align: center;
-    padding: 30px;
-    overflow: hidden;
-    position: relative;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Custom Heart Cursor */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">💖</text></svg>'), auto;
 }
 
 h1 {
-    color: #ff4d88;
-    font-size: 2.8em;
-    margin-bottom: 10px;
-}
-
-h2 {
-    color: #ff69b4;
-    margin-top: 30px;
+    color: var(--primary);
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 5px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+    background: var(--glass);
+    border-radius: 24px;
     padding: 25px;
-    margin: 30px auto;
-    max-width: 700px;
+    margin: 20px auto;
+    max-width: 650px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.patch-notes {
     text-align: left;
-    font-size: 17px;
-    line-height: 1.6;
-    backdrop-filter: blur(12px);
-    border: 4px dashed var(--accent);
-    position: relative;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    background: var(--terminal-bg);
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    margin-top: 15px;
 }
 
 button {
-    position: relative;
-    background: var(--primary);
+    background: linear-gradient(45deg, var(--primary), var(--accent));
     color: white;
     border: none;
-    padding: 14px 28px;
+    padding: 16px 35px;
     border-radius: 50px;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 1.1em;
     cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
-    box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9;
-    animation: pulse 2s infinite;
+    box-shadow: 0 5px 15px rgba(255, 77, 136, 0.4);
+    transition: all 0.3s;
+    margin-top: 15px;
 }
 
 button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 18px var(--primary), 0 0 36px #ff99cc;
+    letter-spacing: 1px;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 77, 136, 0.6);
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9; }
-    50% { box-shadow: 0 0 24px var(--primary), 0 0 48px #ff99cc; }
-    100% { box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9; }
-}
-
-#secretMessageContainer {
+/* Secret Message Modal Overlay */
+#overlay {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 600px;
-    background: rgba(255,255,255,0.9);
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 8px 35px rgba(255,105,180,0.3);
-    backdrop-filter: blur(12px);
+    inset: 0;
+    background: rgba(255, 77, 136, 0.98);
     display: none;
-    text-align: center;
-    z-index: 1000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    padding: 30px;
 }
 
 #secretMessage {
-    font-size: 20px;
-    color: #d63384;
-    line-height: 1.5;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    max-width: 800px;
+    font-weight: 300;
+    line-height: 1.6;
 }
 
-.heart {
-    position: absolute;
-    color: #ff69b4;
-    font-size: 16px;
+/* Floating Elements */
+.floating-emoji {
+    position: fixed;
     pointer-events: none;
-    opacity: 1;
-    transition: all 1s ease-out;
-}
-
-/* Background floating hearts */
-.bg-heart {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255,105,180,0.2);
-    backdrop-filter: blur(6px);
-    animation: floatUp linear infinite;
-    pointer-events: none;
+    z-index: -1;
+    animation: floatUp var(--duration) linear infinite;
+    opacity: 0.6;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(100vh) scale(0.5); opacity: 0.3; }
-    50% { opacity: 0.6; }
-    100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
+    from { transform: translateY(110vh) rotate(0deg); }
+    to { transform: translateY(-10vh) rotate(360deg); }
 }
 
 footer {
     margin-top: 50px;
-    font-size: 14px;
-    color: #888;
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    opacity: 0.7;
 }
+
+.highlight { color: var(--primary); font-weight: bold; }
 </style>
 
-<!-- Typing animation -->
 <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/typeit.min.js"></script>
 </head>
-
 <body>
 
 <h1 id="typing"></h1>
-<p><em>My love, my favorite human, my everything ❤️</em></p>
+<p><i>Branch: <span class="highlight">main</span> | Status: <span class="highlight">Stable & Loving</span> ❤️</i></p>
 
-<!-- Promises Section -->
 <div class="card">
-    <h2>💌 My Promise to You</h2>
-    <p>Today and every day, I promise to stand by your side, laugh with you, support you in everything, and make our life full of love, joy, and warmth.</p>
-    <p>I promise to celebrate your wins, hold you through challenges, and make even the simplest moments magical. You are my home, my happiness, and my heart.</p>
+    <h2>💌 The Core Promise</h2>
+    <p>Today and every day, I promise to be your favorite person to do absolutely nothing with. I promise to support your wildest dreams and be the one who holds the ladder while you reach for the stars.</p>
 </div>
 
-<!-- Lifetime Commitment Section -->
 <div class="card">
-    <h2>💞 Lifetime Commitment</h2>
-    <p>I promise to grow with you, dream with you, and create a world together where love, trust, and laughter never end. No matter what life brings, I am yours completely — forever and always.</p>
+    <h2 style="font-family: 'Courier New', Courier, monospace;">🛠️ System Patch Notes v2.1.1</h2>
+    <div class="patch-notes">
+        <p><strong>[FIXED]</strong> Resolved "Hunger-Induced Cranky Mode" with automatic snack deployment.</p>
+        <p><strong>[OPTIMIZED]</strong> Morning cuddle routine for 25% better mood synchronization.</p>
+        <p><strong>[DEPRECATED]</strong> Successfully removed "Stubbornness.exe" from decision-making loops.</p>
+        <p><strong>[NEW FEATURE]</strong> Unlimited cloud storage for all our future memories and inside jokes.</p>
+    </div>
 </div>
 
-<!-- Secret Love Message Button -->
 <div class="card">
-    <h2>💖 Secret Love Message</h2>
-    <p>Click the button to unlock a little surprise from my heart…</p>
-    <button onclick="showSecretMessage()">Launch_Love_Program.exe</button>
+    <h2>💖 Secret Access</h2>
+    <p>Execute the heart protocol to unlock a message directly from my source code.</p>
+    <button onclick="unlockLove()">Launch_Love_Program.exe</button>
 </div>
 
-<!-- Secret Message Modal -->
-<div id="secretMessageContainer">
+<div id="overlay">
     <div id="secretMessage"></div>
+    <button onclick="closeOverlay()" style="margin-top: 40px; background: white; color: var(--primary); box-shadow: none;">Close Connection</button>
 </div>
 
 <footer>
-Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
+    git commit -m "Lifetime commitment merged into main" <br>
+    Built with ❤️ | No Forks Allowed | User: Husband
 </footer>
 
 <audio id="popSound" src="https://freesound.org/data/previews/522/522177_5121236-lq.mp3"></audio>
 
 <script>
-// Typing animation for header
+// 1. Typing Header
 new TypeIt("#typing", {
-    strings: ["💖 Happy Promise Day, My Love 💖", "You are my heart, my happiness, my forever ❤️"],
-    speed: 100,
-    breakLines: true,
-    loop: false
+    strings: ["Happy Promise Day!", "My Forever Favorite..."],
+    speed: 80,
+    waitUntilVisible: true,
 }).go();
 
-// Show secret message with typing animation + heart fireworks
-function showSecretMessage() {
-    const container = document.getElementById("secretMessageContainer");
-    const message = document.getElementById("secretMessage");
-    container.style.display = "block";
+// 2. Secret Message Activation
+function unlockLove() {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'flex';
+    const popSound = document.getElementById("popSound");
+    popSound.play();
+    
+    // Clear previous content if any
+    document.getElementById("secretMessage").innerHTML = "";
 
-    const text = "💖 You are the best thing life ever gave me. Every moment with you is a treasure, and I promise to love you, support you, and stand by you in every version of life. Forever yours. 💖";
-    message.innerHTML = "";
-    let i = 0;
-    const interval = setInterval(() => {
-        message.innerHTML += text[i];
-        i++;
-        createFirework(container.offsetLeft + container.offsetWidth/2, container.offsetTop + container.offsetHeight/2);
-        if(i >= text.length) clearInterval(interval);
-    }, 50);
+    new TypeIt("#secretMessage", {
+        speed: 40,
+        waitUntilVisible: true,
+        cursor: true
+    })
+    .type("Initializing Love Protocol... 🔓<br>")
+    .pause(800)
+    .type("I promise to love you across every dimension, every version of life, and every line of code. ")
+    .pause(400)
+    .type("You are the most beautiful 'bug' in my life's logic—I never want to fix you. ❤️")
+    .go();
 }
 
-// Heart fireworks on click anywhere
-const popSound = document.getElementById("popSound");
+function closeOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+}
 
-document.addEventListener("click", function(e){
-    popSound.currentTime = 0;
-    popSound.play();
-    for(let i=0;i<12;i++){
-        createFirework(e.clientX, e.clientY);
+// 3. Floating Emoji Generator
+function createEmoji() {
+    const emojis = ['💖', '✨', '🌸', '💘', '💍', '🧸'];
+    const div = document.createElement('div');
+    div.classList.add('floating-emoji');
+    div.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    div.style.left = Math.random() * 100 + 'vw';
+    div.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    div.style.setProperty('--duration', (Math.random() * 5 + 7) + 's');
+    
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 10000);
+}
+
+// Generate an emoji every 600ms
+setInterval(createEmoji, 600);
+
+// 4. Interactive Mouse Trail
+document.addEventListener('mousemove', (e) => {
+    if(Math.random() > 0.85) { // Only spawn occasionally for performance
+        const trail = document.createElement('div');
+        trail.innerHTML = '❤️';
+        trail.style.position = 'fixed';
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+        trail.style.pointerEvents = 'none';
+        trail.style.fontSize = '12px';
+        trail.style.zIndex = '1000';
+        document.body.appendChild(trail);
+        
+        trail.animate([
+            { opacity: 1, transform: 'scale(1) translate(0, 0)' },
+            { opacity: 0, transform: 'scale(2) translate(0, -30px)' }
+        ], { duration: 1000, easing: 'ease-out' });
+        
+        setTimeout(() => trail.remove(), 1000);
     }
 });
-
-// Create heart/firework
-function createFirework(x, y){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤";
-
-    heart.style.fontSize = (12 + Math.random()*20) + "px";
-    heart.style.left = x + (Math.random()*30-15) + "px";
-    heart.style.top = y + (Math.random()*30-15) + "px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.style.transform = `translateY(${-(100 + Math.random()*100)}px) translateX(${Math.random()*200-100}px) rotate(${Math.random()*360}deg) scale(${1+Math.random()})`;
-        heart.style.opacity = 0;
-    }, 50);
-
-    setTimeout(()=> heart.remove(), 1200);
-}
-
-// Background floating hearts
-for(let i=0;i<25;i++){
-    const bgHeart = document.createElement("div");
-    bgHeart.classList.add("bg-heart");
-    bgHeart.style.left = Math.random()*100 + "vw";
-    bgHeart.style.animationDuration = (5 + Math.random()*10) + "s";
-    bgHeart.style.width = (20 + Math.random()*40) + "px";
-    bgHeart.style.height = bgHeart.style.width;
-    document.body.appendChild(bgHeart);
-}
 </script>
 
 </body>
