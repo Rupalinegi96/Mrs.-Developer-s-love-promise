@@ -3,188 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Promise Day | My Forever ❤️</title>
+<title>Promise Day 💖</title>
 
 <style>
 :root {
-    --primary: #ff4d88;
-    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #ffe4ec 100%);
-    --card-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+    --primary: #ff69b4;
+    --secondary: #ffe4ec;
+    --accent: #ff85c1;
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg-gradient);
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #fff0f5, #ffe4ec);
     color: #444;
     text-align: center;
-    padding: 20px;
+    padding: 30px;
+    overflow-x: hidden;
+    position: relative;
     min-height: 100vh;
+    /* --- HEART CURSOR ADDED HERE --- */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">💖</text></svg>'), auto;
+}
+
+/* Ensuring buttons still show a pointer but keep the heart vibe */
+button, a {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">💝</text></svg>'), pointer;
 }
 
 h1 {
-    color: var(--primary);
-    font-size: 2.5rem;
-    margin-bottom: 5px;
+    color: #ff4d88;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #ff69b4;
+    margin-top: 30px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 24px;
-    padding: 30px;
-    margin: 20px auto;
-    max-width: 600px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: var(--card-shadow);
-}
-
-.patch-notes {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 700px;
     text-align: left;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 20px;
-    border-radius: 15px;
-    border-left: 4px solid var(--primary);
+    font-size: 17px;
+    line-height: 1.6;
+    backdrop-filter: blur(12px);
+    border: 4px dashed var(--accent);
+    position: relative;
 }
 
 button {
-    background: linear-gradient(45deg, #ff4d88, #ff85c1);
+    position: relative;
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding: 14px 28px;
     border-radius: 50px;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 77, 136, 0.3);
+    font-size: 16px;
+    margin-top: 20px;
     transition: 0.3s;
+    box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9;
+    animation: pulse 2s infinite;
 }
 
-button:hover { transform: scale(1.05); }
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 18px var(--primary), 0 0 36px #ff99cc;
+}
 
-/* --- THE ROMANTIC OVERLAY --- */
-#overlay {
+@keyframes pulse {
+    0% { box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9; }
+    50% { box-shadow: 0 0 24px var(--primary), 0 0 48px #ff99cc; }
+    100% { box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9; }
+}
+
+#secretMessageContainer {
     position: fixed;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.4); /* Light mist effect */
-    backdrop-filter: blur(15px); /* Soft focus background */
-    -webkit-backdrop-filter: blur(15px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    background: rgba(255,255,255,0.9);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 8px 35px rgba(255,105,180,0.3);
+    backdrop-filter: blur(12px);
     display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
-
-.message-box {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    max-width: 85%;
-    width: 450px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    border: 1px solid var(--primary);
+    text-align: center;
+    z-index: 1000;
 }
 
 #secretMessage {
-    font-size: 1.3rem;
+    font-size: 20px;
     color: #d63384;
-    line-height: 1.6;
-    font-style: italic;
+    line-height: 1.5;
 }
 
-/* Floating Hearts Background */
-.floating-heart {
-    position: fixed;
+.heart {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 16px;
     pointer-events: none;
-    z-index: -1;
-    animation: floatUp 8s linear infinite;
-    opacity: 0.5;
+    opacity: 1;
+    z-index: 9999;
+    transition: all 1s ease-out;
+}
+
+.bg-heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,105,180,0.2);
+    backdrop-filter: blur(6px);
+    animation: floatUp linear infinite;
+    pointer-events: none;
 }
 
 @keyframes floatUp {
-    from { transform: translateY(110vh); opacity: 0.8; }
-    to { transform: translateY(-10vh); opacity: 0; }
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
 }
 
-footer { margin-top: 40px; font-size: 12px; opacity: 0.6; }
+footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #888;
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/typeit.min.js"></script>
 </head>
+
 <body>
 
 <h1 id="typing"></h1>
-<p><i>Branch: <b>main</b> | Status: <b>Stable & Loving</b> ❤️</i></p>
+<p><em>My love, my favorite human, my everything ❤️</em></p>
 
 <div class="card">
-    <h2>💌 My Promise</h2>
-    <p>I promise to be your debugger when life gets glitchy and your biggest fan when you're winning. You're the best part of my day, every single day.</p>
+    <h2>💌 My Promise to You</h2>
+    <p>Today and every day, I promise to stand by your side, laugh with you, support you in everything, and make our life full of love, joy, and warmth.</p>
+    <p>I promise to celebrate your wins, hold you through challenges, and make even the simplest moments magical. You are my home, my happiness, and my heart.</p>
 </div>
 
 <div class="card">
-    <h2>🛠️ Relationship Changelog</h2>
-    <div class="patch-notes">
-        <p><b>[FIXED]</b> Resolved "Hunger-Induced Cranky Mode" via snack-priority-logic.</p>
-        <p><b>[NEW]</b> Added 24/7 technical support for hugs and emotional debugging.</p>
-        <p><b>[PATCHED]</b> Improved listening protocols for better communication.</p>
-    </div>
+    <h2>💞 Lifetime Commitment</h2>
+    <p>I promise to grow with you, dream with you, and create a world together where love, trust, and laughter never end. No matter what life brings, I am yours completely — forever and always.</p>
 </div>
 
 <div class="card">
-    <h2>💖 Private Key</h2>
-    <p>Unlock my true heart.exe</p>
-    <button onclick="unlockLove()">Show My Heart</button>
+    <h2>💖 Secret Love Message</h2>
+    <p>Click the button to unlock a little surprise from my heart…</p>
+    <button onclick="showSecretMessage()">Launch_Love_Program.exe</button>
 </div>
 
-<div id="overlay">
-    <div class="message-box">
-        <div id="secretMessage"></div>
-        <button onclick="closeOverlay()" style="margin-top: 30px; background: #eee; color: #666; font-size: 0.9em; box-shadow: none; padding: 10px 20px;">Return</button>
-    </div>
+<div id="secretMessageContainer">
+    <div id="secretMessage"></div>
+    <button onclick="this.parentElement.style.display='none'" style="margin-top: 20px; background:#ff85c1; animation:none;">Close</button>
 </div>
 
 <footer>
-    git commit -m "Merged forever with you" | Built with ❤️
+Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
 </footer>
+
+<audio id="popSound" src="https://freesound.org/data/previews/522/522177_5121236-lq.mp3"></audio>
 
 <script>
 new TypeIt("#typing", {
-    strings: ["Happy Promise Day!", "My Forever Human..."],
-    speed: 80,
-    waitUntilVisible: true,
+    strings: ["💖 Happy Promise Day, My Love 💖", "You are my heart, my happiness, my forever ❤️"],
+    speed: 100,
+    breakLines: true,
+    loop: false
 }).go();
 
-function unlockLove() {
-    document.getElementById('overlay').style.display = 'flex';
-    document.getElementById('secretMessage').innerHTML = "";
+function showSecretMessage() {
+    const container = document.getElementById("secretMessageContainer");
+    const message = document.getElementById("secretMessage");
+    container.style.display = "block";
 
-    new TypeIt("#secretMessage", {
-        speed: 50,
-        cursor: false
-    })
-    .type("My dearest, <br><br>")
-    .pause(400)
-    .type("I promise to love you across every dimension and every line of code. You are the most beautiful part of my life. ❤️")
-    .go();
+    const text = "💖 You are the best thing life ever gave me. Every moment with you is a treasure, and I promise to love you, support you, and stand by you in every version of life. Forever yours. 💖";
+    message.innerHTML = "";
+    let i = 0;
+    const interval = setInterval(() => {
+        message.innerHTML += text[i];
+        i++;
+        createFirework(container.offsetLeft + container.offsetWidth/2, container.offsetTop + container.offsetHeight/2);
+        if(i >= text.length) clearInterval(interval);
+    }, 50);
 }
 
-function closeOverlay() {
-    document.getElementById('overlay').style.display = 'none';
+const popSound = document.getElementById("popSound");
+
+function handleExplosion(e) {
+    // Logic to handle both touch (mobile) and click (desktop)
+    const x = e.clientX || (e.touches && e.touches[0].clientX);
+    const y = e.clientY || (e.touches && e.touches[0].clientY);
+    
+    if (x && y) {
+        popSound.currentTime = 0;
+        popSound.play();
+        for(let i=0; i<12; i++){
+            createFirework(x, y);
+        }
+    }
 }
 
-// Background hearts
-setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('floating-heart');
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+document.addEventListener("mousedown", handleExplosion);
+document.addEventListener("touchstart", handleExplosion);
+
+function createFirework(x, y){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+
+    heart.style.fontSize = (12 + Math.random()*20) + "px";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-}, 700);
+
+    setTimeout(()=>{
+        heart.style.transform = `translateY(${-(100 + Math.random()*100)}px) translateX(${(Math.random()-0.5)*200}px) rotate(${Math.random()*360}deg) scale(${1+Math.random()})`;
+        heart.style.opacity = 0;
+    }, 50);
+
+    setTimeout(()=> heart.remove(), 1200);
+}
+
+for(let i=0;i<25;i++){
+    const bgHeart = document.createElement("div");
+    bgHeart.classList.add("bg-heart");
+    bgHeart.style.left = Math.random()*100 + "vw";
+    bgHeart.style.animationDuration = (5 + Math.random()*10) + "s";
+    bgHeart.style.width = (20 + Math.random()*40) + "px";
+    bgHeart.style.height = bgHeart.style.width;
+    document.body.appendChild(bgHeart);
+}
 </script>
 
 </body>
