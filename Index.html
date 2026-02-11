@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise Day 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', monospace;
+        background: linear-gradient(to bottom right, #fff0f5, #ffe4ec);
+        color: #444;
+        text-align: center;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #ff4d88;
+        font-size: 2.5em;
+    }
+
+    h2 {
+        color: #ff69b4;
+        margin-top: 40px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+        padding: 25px;
+        margin: 30px auto;
+        max-width: 700px;
+    }
+
+    pre {
+        background: #fff5f8;
+        padding: 15px;
+        border-radius: 10px;
+        overflow-x: auto;
+        text-align: left;
+    }
+
+    button {
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff4d88;
+        transform: scale(1.05);
+    }
+
+    #secretMessage {
+        display: none;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #d63384;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    footer {
+        margin-top: 50px;
+        font-size: 14px;
+        color: #888;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>💖 Happy Promise Day, My Favorite Programmer 💖</h1>
+<p><em>You debug my bad days and compile my happiness</em></p>
+
+<div class="card">
+    <h2>💘 Core Function</h2>
+    <pre>
+while (myHeartBeats) {
+    loveYou();
+    respectYou();
+    chooseYou();
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>💞 Lifetime Promise</h2>
+    <pre>
+try:
+    be_strong_for_us()
+except BadDayError:
+    hug_you_tight()
+    say("You debug my bad days ❤️")
+    </pre>
+</div>
+
+<div class="card">
+    <h2>🔒 Final Commit</h2>
+    <pre>
+git commit -m "feat: lifetime promise to love you forever ❤️"
+git push origin forever
+    </pre>
+</div>
+
+<div class="card">
+    <h2>💌 Secret Developer Message</h2>
+    <p>Only the best programmer knows where to click…</p>
+    <button onclick="revealMessage()">Run Secret_Love_Message.exe</button>
+    <div id="secretMessage">
+        💖 You are the best thing life ever deployed into my world.  
+        No bugs, no crashes — just forever love, hugs, and partnership.  
+        Thank you for being my safe place, my happiness, and my favorite human.  
+        I promise to stand by you in every version of life. 💖
+    </div>
+</div>
+
+<footer>
+Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
+</footer>
+
+<script>
+function revealMessage() {
+    document.getElementById("secretMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
