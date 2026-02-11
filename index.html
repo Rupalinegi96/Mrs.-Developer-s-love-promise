@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Promise Day 💖</title>
 
-<!-- Styles -->
 <style>
 :root {
     --primary: #ff69b4;
@@ -20,8 +19,15 @@ body {
     color: #444;
     text-align: center;
     padding: 30px;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
+    /* Heart Cursor */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">💖</text></svg>'), auto;
+}
+
+button, a {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">💝</text></svg>'), pointer;
 }
 
 h1 {
@@ -58,7 +64,6 @@ button {
     padding: 14px 28px;
     border-radius: 50px;
     font-size: 16px;
-    cursor: pointer;
     margin-top: 20px;
     transition: 0.3s;
     box-shadow: 0 0 12px var(--accent), 0 0 24px #ffb3d9;
@@ -104,10 +109,10 @@ button:hover {
     font-size: 16px;
     pointer-events: none;
     opacity: 1;
+    z-index: 9999;
     transition: all 1s ease-out;
 }
 
-/* Background floating hearts */
 .bg-heart {
     position: absolute;
     width: 50px;
@@ -132,7 +137,6 @@ footer {
 }
 </style>
 
-<!-- Typing animation -->
 <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/typeit.min.js"></script>
 </head>
 
@@ -141,29 +145,25 @@ footer {
 <h1 id="typing"></h1>
 <p><em>My love, my favorite human, my everything ❤️</em></p>
 
-<!-- Promises Section -->
 <div class="card">
     <h2>💌 My Promise to You</h2>
     <p>Today and every day, I promise to stand by your side, laugh with you, support you in everything, and make our life full of love, joy, and warmth.</p>
-    <p>I promise to celebrate your wins, hold you through challenges, and make even the simplest moments magical. You are my home, my happiness, and my heart.</p>
 </div>
 
-<!-- Lifetime Commitment Section -->
 <div class="card">
     <h2>💞 Lifetime Commitment</h2>
-    <p>I promise to grow with you, dream with you, and create a world together where love, trust, and laughter never end. No matter what life brings, I am yours completely — forever and always.</p>
+    <p>I promise to grow with you, dream with you, and create a world together where love, trust, and laughter never end.</p>
 </div>
 
-<!-- Secret Love Message Button -->
-<div class="card">
+<div class="card" style="text-align: center;">
     <h2>💖 Secret Love Message</h2>
-    <p>Click the button to unlock a little surprise from my heart…</p>
+    <p style="text-align: left;">Click the button to unlock a little surprise from my heart…</p>
     <button onclick="showSecretMessage()">Launch_Love_Program.exe</button>
 </div>
 
-<!-- Secret Message Modal -->
 <div id="secretMessageContainer">
     <div id="secretMessage"></div>
+    <button onclick="this.parentElement.style.display='none'" style="margin-top: 20px; background:#ff85c1; animation:none;">Close</button>
 </div>
 
 <footer>
@@ -173,7 +173,6 @@ Built with ❤️ by Your Wife | Main Branch = Forever | No Forks Allowed
 <audio id="popSound" src="https://freesound.org/data/previews/522/522177_5121236-lq.mp3"></audio>
 
 <script>
-// Typing animation for header
 new TypeIt("#typing", {
     strings: ["💖 Happy Promise Day, My Love 💖", "You are my heart, my happiness, my forever ❤️"],
     speed: 100,
@@ -181,7 +180,6 @@ new TypeIt("#typing", {
     loop: false
 }).go();
 
-// Show secret message with typing animation + heart fireworks
 function showSecretMessage() {
     const container = document.getElementById("secretMessageContainer");
     const message = document.getElementById("secretMessage");
@@ -198,38 +196,40 @@ function showSecretMessage() {
     }, 50);
 }
 
-// Heart fireworks on click anywhere
 const popSound = document.getElementById("popSound");
 
-document.addEventListener("click", function(e){
-    popSound.currentTime = 0;
-    popSound.play();
-    for(let i=0;i<12;i++){
-        createFirework(e.clientX, e.clientY);
+function handleExplosion(e) {
+    const x = e.clientX || (e.touches && e.touches[0].clientX);
+    const y = e.clientY || (e.touches && e.touches[0].clientY);
+    
+    if (x && y) {
+        popSound.currentTime = 0;
+        popSound.play();
+        for(let i=0; i<12; i++){
+            createFirework(x, y);
+        }
     }
-});
+}
 
-// Create heart/firework
+document.addEventListener("mousedown", handleExplosion);
+document.addEventListener("touchstart", handleExplosion);
+
 function createFirework(x, y){
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤";
-
     heart.style.fontSize = (12 + Math.random()*20) + "px";
-    heart.style.left = x + (Math.random()*30-15) + "px";
-    heart.style.top = y + (Math.random()*30-15) + "px";
-
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
     document.body.appendChild(heart);
 
     setTimeout(()=>{
-        heart.style.transform = `translateY(${-(100 + Math.random()*100)}px) translateX(${Math.random()*200-100}px) rotate(${Math.random()*360}deg) scale(${1+Math.random()})`;
+        heart.style.transform = `translateY(${-(100 + Math.random()*100)}px) translateX(${(Math.random()-0.5)*200}px) rotate(${Math.random()*360}deg) scale(${1+Math.random()})`;
         heart.style.opacity = 0;
     }, 50);
-
     setTimeout(()=> heart.remove(), 1200);
 }
 
-// Background floating hearts
 for(let i=0;i<25;i++){
     const bgHeart = document.createElement("div");
     bgHeart.classList.add("bg-heart");
